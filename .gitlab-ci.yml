@@ -1,4 +1,4 @@
-$dir = 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe'
+$msbuild = '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"'
 
 stages: 
   - build   
@@ -10,7 +10,7 @@ build_job:
   script: 
     - 'cd ConsoleApp2'
     - 'C:\Tools\Nuget\nuget.exe restore'
-    - "'$dir' ConsoleApp2.sln"
+    - '$msbuild ConsoleApp2.sln'
   artifacts: 
     paths: 
       - 'ConsoleApp2\ConsoleApp2bin\Debug\ConsoleApp2.exe' 
