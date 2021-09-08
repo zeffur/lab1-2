@@ -1,15 +1,5 @@
 stages: 
-  - deploy
   - build   
-
-deploy:
-  stage: deploy
-  script:
-    - 'dotnet pack -c Release'
-    - 'dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text'
-    - 'dotnet nuget push "bin/Release/*.nupkg" --source gitlab'
-  only:
-    - main
 
 build_job: 
   stage: build 
@@ -17,6 +7,7 @@ build_job:
     - branches 
   script: 
     - 'cd ConsoleApp2'
+    - '"C:\Tools\Nuget\nuget.exe" restore'
     - '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" ConsoleApp2.sln'
   artifacts: 
     paths: 
